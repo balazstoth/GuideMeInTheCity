@@ -10,8 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.uniobuda.nik.guideme.MainActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/btn_welcome"
+        android:text="Click here!"
+        android:background="@android:color/holo_orange_dark" />
 </RelativeLayout>
