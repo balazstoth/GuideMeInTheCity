@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="hu.uniobuda.nik.guideme.LoginActivity">
+
+    <EditText
+        android:id="@+id/userNameBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="25dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/passwordBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:inputType="textPassword"
+        android:layout_below="@+id/userNameBox"
+        android:layout_alignStart="@+id/userNameBox"
+        android:layout_alignEnd="@+id/userNameBox" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/passwordBox"
+        android:layout_below="@+id/passwordBox"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_btn_login"
+        android:text="Log In"
+        android:layout_alignEnd="@+id/passwordBox" />
+
+    <Button
+        android:id="@+id/brn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create account"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/btn_login"
+        android:layout_alignStart="@+id/btn_login"
+        android:background="@drawable/login_btn_create"
+        android:layout_alignEnd="@+id/btn_login" />
+
+    <Button
+        android:id="@+id/btn_tourist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I'm a tourists!"
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/brn_create"
+        android:layout_alignStart="@+id/brn_create"
+        android:layout_alignEnd="@+id/brn_create"
+        android:background="@drawable/login_btn_tourist"
+        />
+</RelativeLayout>
