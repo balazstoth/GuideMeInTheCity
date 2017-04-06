@@ -4,7 +4,7 @@ package hu.uniobuda.nik.guideme;
  * Created by tothb on 2017. 03. 21..
  */
 
-public enum Type
+public enum Category
 {
     Church,
     Tower,

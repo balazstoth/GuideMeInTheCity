@@ -8,16 +8,16 @@ import java.util.Date;
 
 public class Monument
 {
-    string name;
+    String name;
     Coordinate coordinate;
-    string description;
+    String description;
     //Picture
     int rate;
     int numberOfVisitors;
     Date yearOfBuilt;
-    Type type;
+    Category type;
 
-    public Monument(string name, Coordinate coordinate, string description, int rate, int numberOfVisitors, Date yearOfBuilt, Type type) {
+    public Monument(String name, Coordinate coordinate, String description, int rate, int numberOfVisitors, Date yearOfBuilt, Category type) {
        this.name = name;
         this.coordinate = coordinate;
         this.description = description;
@@ -27,10 +27,10 @@ public class Monument
         this.type = type;
     }
 
-    public string getName() {
+    public String getName() {
         return name;
     }
-    public void setName(string name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -41,10 +41,10 @@ public class Monument
         this.coordinate = coordinate;
     }
 
-    public string getDescription() {
+    public String getDescription() {
         return description;
     }
-    public void setDescription(string description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -69,10 +69,10 @@ public class Monument
         this.yearOfBuilt = yearOfBuilt;
     }
 
-    public Type getType() {
+    public Category getType() {
         return type;
     }
-    public void setType(Type type) {
+    public void setType(Category type) {
         this.type = type;
     }
 }

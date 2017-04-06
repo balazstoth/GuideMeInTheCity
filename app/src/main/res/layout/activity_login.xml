@@ -60,7 +60,7 @@
         android:layout_alignEnd="@+id/passwordBox" />
 
     <Button
-        android:id="@+id/brn_create"
+        android:id="@+id/btn_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create account"
@@ -75,10 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I'm a tourists!"
-        android:layout_marginTop="71dp"
-        android:layout_below="@+id/brn_create"
-        android:layout_alignStart="@+id/brn_create"
-        android:layout_alignEnd="@+id/brn_create"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/btn_create"
+        android:layout_alignStart="@+id/btn_create"
+        android:layout_alignEnd="@+id/btn_create"
         android:background="@drawable/login_btn_tourist"
         />
 </RelativeLayout>
