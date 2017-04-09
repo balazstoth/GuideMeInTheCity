@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/textView_category_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:text="Select category" />
+
+    <ListView
+        android:id="@+id/listView_category_l"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/textView_category_l"
+        android:layout_below="@+id/textView_category_l"
+        android:layout_marginTop="5dp"
+        android:layout_alignEnd="@+id/textView_category_l" />
+
+    <TextView
+        android:id="@+id/textView_items_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/listView_items_l"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:text="Select item" />
+
+    <ListView
+        android:id="@+id/listView_items_l"
+        android:layout_toRightOf="@+id/textView_category_l"
+        android:layout_below="@+id/textView_items_l"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

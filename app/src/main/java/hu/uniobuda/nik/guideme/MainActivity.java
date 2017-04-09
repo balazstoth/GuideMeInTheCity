@@ -25,15 +25,17 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CopyCategories();
-        Spinner spinnerCategory = (Spinner) findViewById(R.id.spinner_category);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, categories_string);
-        spinnerCategory.setAdapter(spinnerAdapter);
+        //setContentView(R.layout.activity_main);
+
+       // CopyCategories();
+        // Spinner spinnerCategory = (Spinner) findViewById(R.id.spinner_category);
+        //ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, categories_string);
+        //spinnerCategory.setAdapter(spinnerAdapter);
     }
 
-    private void CopyCategories()
-    {
-        for(int i = 0; i < categories_enum.size(); i++)
-            categories_string.add(categories_enum.get(i).toString());
-    }
+    //private void CopyCategories()
+    //{
+    //    for(int i = 0; i < categories_enum.size(); i++)
+    //        categories_string.add(categories_enum.get(i).toString());
+    //}
 }
