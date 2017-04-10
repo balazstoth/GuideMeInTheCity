@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="hu.uniobuda.nik.guideme.AddActivity"
-    android:background="@drawable/background">
-
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/fragment_add_p"
-        android:name="hu.uniobuda.nik.guideme.PortraitFragment_add"
+        android:id="@+id/fragment_add_l"
+        android:name="hu.uniobuda.nik.guideme.LandscapeFragment_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        tools:layout="@layout/add_portrait"
+        tools:layout="@layout/add_landscape"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
+
 </RelativeLayout>

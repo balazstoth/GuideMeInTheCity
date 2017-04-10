@@ -50,35 +50,34 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/passwordBox"
         android:layout_below="@+id/passwordBox"
         android:layout_marginTop="25dp"
         android:background="@drawable/login_btn_login"
         android:text="Log In"
-        android:layout_alignEnd="@+id/passwordBox" />
+        />
 
     <Button
         android:id="@+id/btn_create"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Create account"
         android:layout_marginTop="6dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_login"
-        android:layout_alignStart="@+id/btn_login"
-        android:background="@drawable/login_btn_create"
-        android:layout_alignEnd="@+id/btn_login" />
+        android:background="@drawable/login_btn_create" />
 
     <Button
         android:id="@+id/btn_tourist"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:text="I'm a tourists!"
         android:layout_marginTop="6dp"
         android:layout_below="@+id/btn_create"
-        android:layout_alignStart="@+id/btn_create"
-        android:layout_alignEnd="@+id/btn_create"
         android:background="@drawable/login_btn_tourist"
         />
+
 </RelativeLayout>

@@ -8,11 +8,12 @@
     tools:context="hu.uniobuda.nik.guideme.MainActivity">
 
     <fragment
-        android:id="@+id/fragment"
-        android:name="hu.uniobuda.nik.guideme.PortraitFragment"
+        android:id="@+id/fragment_main_p"
+        android:name="hu.uniobuda.nik.guideme.PortraitFragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         tools:layout="@layout/main_portrait"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
