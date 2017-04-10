@@ -1,12 +1,16 @@
 package hu.uniobuda.nik.guideme;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +32,16 @@ public class PortraitFragment extends Fragment
         Spinner spinnerCategory = (Spinner) v.findViewById(R.id.spinner_category_p);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categories_string);
         spinnerCategory.setAdapter(spinnerAdapter);
+
+        Button btn_add = (Button)v.findViewById(R.id.imageButton_add_p);
+        final Intent addIntent_p = new Intent(getActivity(),AddActivity.class);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(addIntent_p);
+            }
+        });
+
         return v;
     }
 

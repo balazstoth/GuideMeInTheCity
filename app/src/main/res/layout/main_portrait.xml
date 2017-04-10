@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -45,4 +46,19 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
+
+    <Button
+        android:id="@+id/imageButton_add_p"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignEnd="@+id/listView_items_p"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/floating_button"
+        android:text="+"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_light" />
+
 </RelativeLayout>
