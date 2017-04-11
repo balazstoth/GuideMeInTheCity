@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -83,5 +84,41 @@
         android:layout_alignBottom="@+id/EditText_date_add_p"
         android:layout_alignStart="@+id/spinner_category_add_p"
         android:layout_alignEnd="@+id/spinner_category_add_p" />
+
+    <TextView
+        android:id="@+id/textView_photo_add_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Picture"
+        android:textSize="18dp"
+        android:layout_below="@+id/button_date_add_p"
+        android:layout_alignStart="@+id/EditText_date_add_p" />
+
+    <Button
+        android:id="@+id/button_photo_take_add_p"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:text="Camera"
+        android:layout_alignBaseline="@+id/textView_photo_add_p"
+        android:layout_alignBottom="@+id/textView_photo_add_p"
+        android:layout_alignStart="@+id/button_date_add_p" />
+
+    <Button
+        android:id="@+id/button_photo_select_add_p"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:text="Album"
+        android:layout_alignBaseline="@+id/button_photo_take_add_p"
+        android:layout_alignBottom="@+id/button_photo_take_add_p"
+        android:layout_alignEnd="@+id/button_date_add_p" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView_photo_add_p"
+        android:visibility="visible"
+        android:src="@mipmap/ic_launcher"/>
 
 </RelativeLayout>
