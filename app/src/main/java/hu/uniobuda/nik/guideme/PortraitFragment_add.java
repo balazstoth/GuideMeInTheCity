@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,9 +20,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.content.Context;
+import android.widget.Toast;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,9 +43,12 @@ public class PortraitFragment_add extends Fragment
     Button btn_datePicker;
     Button btn_camera;
     Button btn_gallery;
+    Button btn_add;
+    EditText etxt_name;
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
     ImageView iv;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -84,6 +92,34 @@ public class PortraitFragment_add extends Fragment
             }
         });
 
+
+        etxt_name = (EditText) v.findViewById(R.id.EditText_name_add_p);
+        btn_add = (Button)v.findViewById(R.id.button_add_add_p);
+        btn_add.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(etxt_name.getText().toString().equals(""))
+                {
+                    Toast.makeText(getActivity(),"Name field cannot be empty!",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    try
+                    {
+                        Toast.makeText(getActivity(),"Count: " + PortraitFragment_main.dbh.Count(),Toast.LENGTH_SHORT).show();
+                        PortraitFragment_main.dbh.Insert(etxt_name.getText().toString());
+
+                        Toast.makeText(getActivity(),"Item added succesfully!",Toast.LENGTH_SHORT).show();
+                    }
+                    catch(SQLiteException ex)
+                    {
+                        Toast.makeText(getActivity(),"Item already added!",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
         return v;
     }
 
@@ -109,7 +145,6 @@ public class PortraitFragment_add extends Fragment
         for(int i = 0; i < categories_enum.size(); i++)
             categories_string.add(categories_enum.get(i).toString());
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)

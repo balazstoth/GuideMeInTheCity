@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,6 +24,9 @@ public class PortraitFragment_main extends Fragment
 {
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
+    ListView elements;
+    public static DatabaseHelper dbh;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,6 +45,11 @@ public class PortraitFragment_main extends Fragment
                 startActivity(addIntent_p);
             }
         });
+
+        dbh = new DatabaseHelper(getActivity());
+        elements = (ListView)v.findViewById(R.id.listView_items_p);
+        ArrayAdapter<String> ListViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, dbh.List());
+        elements.setAdapter(ListViewAdapter);
 
         return v;
     }

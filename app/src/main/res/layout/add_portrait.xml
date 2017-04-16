@@ -115,10 +115,18 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView_photo_add_p"
         android:visibility="visible"
         android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_add_add_p"
+        android:text="Add new item"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignEnd="@+id/button_photo_select_add_p" />
 
 </RelativeLayout>
