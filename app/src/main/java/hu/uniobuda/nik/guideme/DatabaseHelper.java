@@ -23,12 +23,14 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public DatabaseHelper(Context context)
     {
         super(context, DATABASE_NAME, null, 1);
+        //DeleteTable();
+        //CreateTable();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, CATEGORY TEXT, DATE TEXT);");
     }
 
     @Override
@@ -38,16 +40,30 @@ public class DatabaseHelper extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    public void Insert(String name)
+    public void Insert(String name,String description, String date, String category)
     {
         ContentValues cv = new ContentValues();
         cv.put("NAME",name);
+        cv.put("DESC",description);
+        cv.put("DATE",date);
+        cv.put("CATEGORY",category);
+
         this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
     }
 
     public void Delete(String name)
     {
         this.getWritableDatabase().delete(TABLE_NAME,"NAME='"+name+"'",null);
+    }
+
+    public void DeleteTable()
+    {
+        this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+    }
+
+    public void CreateTable()
+    {
+        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT);");
     }
 
     public void Update(String oldName, String newName)
@@ -65,16 +81,14 @@ public class DatabaseHelper extends SQLiteOpenHelper
         }
         return c;
     }
-    public List<String> List()
+    public List<Monument> List(String category)
     {
-        List<String> list = new ArrayList<String>();
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME,null);
+        List<Monument> list = new ArrayList<Monument>();
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "'",null);
         while (cursor.moveToNext())
         {
-            list.add(cursor.getString(1));
+            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
         }
-        if (list == null)
-            list.add("asdasdasd");
 
         return list;
     }
