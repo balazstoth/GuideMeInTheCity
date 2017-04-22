@@ -14,65 +14,83 @@ public class Monument
     //Picture
     int rate;
     int numberOfVisitors;
-    Date yearOfBuilt;
-    Category type;
+    String date;
+    String category;
 
-    public Monument(String name, Coordinate coordinate, String description, int rate, int numberOfVisitors, Date yearOfBuilt, Category type) {
-       this.name = name;
-        this.coordinate = coordinate;
-        this.description = description;
-        this.rate = rate;
-        this.numberOfVisitors = numberOfVisitors;
-        this.yearOfBuilt = yearOfBuilt;
-        this.type = type;
-    }
-
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
-
-    public Coordinate getCoordinate() {
+    public Coordinate getCoordinate()
+    {
         return coordinate;
     }
-    public void setCoordinate(Coordinate coordinate) {
+    public void setCoordinate(Coordinate coordinate)
+    {
         this.coordinate = coordinate;
     }
-
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
-
-    public int getRate() {
+    public int getRate()
+    {
         return rate;
     }
-    public void setRate(int rate) {
+    public void setRate(int rate)
+    {
         this.rate = rate;
     }
-
-    public int getNumberOfVisitors() {
+    public int getNumberOfVisitors()
+    {
         return numberOfVisitors;
     }
-    public void setNumberOfVisitors(int numberOfVisitors) {
+    public void setNumberOfVisitors(int numberOfVisitors)
+    {
         this.numberOfVisitors = numberOfVisitors;
     }
+    public String getDate()
+    {
+        return date;
+    }
+    public void setDate(String date)
+    {
+        this.date = date;
+    }
+    public String getCategory()
+    {
+        return category;
+    }
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
 
-    public Date getYearOfBuilt() {
-        return yearOfBuilt;
-    }
-    public void setYearOfBuilt(Date yearOfBuilt) {
-        this.yearOfBuilt = yearOfBuilt;
+    public Monument(String name, Coordinate coordinate, String description, int rate, int numberOfVisitors, String date, String category)
+    {
+        this.name = name;
+        this.coordinate = coordinate;
+        this.description = description;
+        this.rate = rate;
+        this.numberOfVisitors = numberOfVisitors;
+        this.date = date;
+        this.category = category;
     }
 
-    public Category getType() {
-        return type;
-    }
-    public void setType(Category type) {
-        this.type = type;
+    public Monument(String name, String description, String date, String category)
+    {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.category = category;
     }
 }
+

@@ -1,101 +1,93 @@
 package hu.uniobuda.nik.guideme;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Tamás on 2017. 04. 22..
+ * Created by tothb on 2017. 04. 16..
  */
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    private  static final  int DATABASE_VERSION = 1;
-    private  static final  String DATABASE_NAME = "users.db";
-    private  static final  String TABLE_NAME = "users";
-    private  static final  String COLUMN_ID = "id";
-    private  static final  String COLUMN_EMAIL = "email";
-    private  static final  String COLUMN_USERNAME = "username";
-    private  static final  String COLUMN_PASSWORD = "password";
-    SQLiteDatabase db;
+public class DatabaseHelper extends SQLiteOpenHelper
+{
+    public static String DATABASE_NAME = "Test.db";
+    public static String TABLE_NAME = "Monuments";
 
-    private static final  String TABLE_CREATE = "CREATE TABLE "+TABLE_NAME+" ( "+COLUMN_ID+" integer primary key not null, "
-    +COLUMN_EMAIL+" text not null, "+COLUMN_USERNAME+" text not null, "+COLUMN_PASSWORD+" text not null ) ";
-
-    public DatabaseHelper (Context context)
+    public DatabaseHelper(Context context)
     {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
+        super(context, DATABASE_NAME, null, 1);
+        //DeleteTable();
+        //CreateTable();
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
-        this.db = db;
-    }
-
-    public void insertUser(User u){
-        ContentValues values = new ContentValues();
-
-
-        String query = "select * from "+TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        int counter = cursor.getCount();
-        values.put(COLUMN_ID, counter);
-        values.put(COLUMN_EMAIL, u.getEmail());
-        values.put(COLUMN_USERNAME, u.getUsername());
-        values.put(COLUMN_PASSWORD, u.getPassword());
-
-        db.insert(TABLE_NAME, null, values);
-        db.close();
-    }
-
-    public String Search(String usernName)
+    public void onCreate(SQLiteDatabase db)
     {
-        db = this.getReadableDatabase();
-        String query = "select "+COLUMN_USERNAME+", "+COLUMN_PASSWORD+" from "+TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        String a,b = "";
-        if(cursor.moveToFirst())
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, CATEGORY TEXT, DATE TEXT);");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    public void Insert(String name,String description, String date, String category)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put("NAME",name);
+        cv.put("DESC",description);
+        cv.put("DATE",date);
+        cv.put("CATEGORY",category);
+
+        this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
+    }
+
+    public void Delete(String name)
+    {
+        this.getWritableDatabase().delete(TABLE_NAME,"NAME='"+name+"'",null);
+    }
+
+    public void DeleteTable()
+    {
+        this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+    }
+
+    public void CreateTable()
+    {
+        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT);");
+    }
+
+    public void Update(String oldName, String newName)
+    {
+        this.getWritableDatabase().execSQL("UPDATE " + TABLE_NAME + "SET NAME='" + newName + "' WHERE NAME='" + oldName + "'");
+    }
+
+    public int Count()
+    {
+        int c = 0;
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME,null);
+        while (cursor.moveToNext())
         {
-            do {
-                    a = cursor.getString(0);
-                    b = cursor.getString(1);
-                    if (a.equals(usernName))
-                    {
-                        b = cursor.getString(1);
-                        break;
-                    }
-            }
-            while(cursor.moveToNext());
+            c++;
         }
-
-        return  b;
+        return c;
     }
-
-    public int CheckUserName(String usernName)
+    public List<Monument> List(String category)
     {
-        db = this.getWritableDatabase();
-
-        String query = "select * from "+TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (!cursor.moveToFirst()){
-            return 1;
+        List<Monument> list = new ArrayList<Monument>();
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "'",null);
+        while (cursor.moveToNext())
+        {
+            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
         }
-        else if (!cursor.getString(2).equals(usernName))
-            return 1;
-        else
-            return 0;
-    }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String query = "DROP TABLE IF EXISTS "+TABLE_NAME;
-        db.execSQL(query);
-        this.onCreate(db);
+        return list;
     }
 }

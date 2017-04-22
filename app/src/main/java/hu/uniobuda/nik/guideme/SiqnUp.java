@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class SiqnUp extends Activity {
     EditText editName, editEmail, editUserName, editPassword;
     Button signupButton;
-    DatabaseHelper helper = new DatabaseHelper(this);
+    DatabaseHelperUser helper = new DatabaseHelperUser(this);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
