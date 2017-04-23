@@ -38,7 +38,7 @@ public class ListAdapter extends BaseAdapter
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         Monument c = items.get(i);
-        String monumentString = "Name: " + c.getName() + ", Built in: " + c.getDate();
+        String monumentString = "Name: " + c.getName() + "\n" + "Built in: " + c.getDate() + ", Rate: " + c.getRate();
         View listItemView = view;
 
         if(listItemView == null)
@@ -51,5 +51,6 @@ public class ListAdapter extends BaseAdapter
 
     public void RefreshList(List<Monument> list) {
         this.items = list;
+
     }
 }

@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by tothb on 2017. 04. 10..
  */
@@ -52,13 +54,15 @@ public class PortraitFragment_add extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.add_portrait,container,false);
-        iv = (ImageView)v.findViewById(R.id.imageView4);
+        iv = (ImageView)v.findViewById(R.id.imageView_add_p);
+
+        //Set the spinner
         CopyCategories();
         Spinner spinnerCategory = (Spinner) v.findViewById(R.id.spinner_category_add_p);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categories_string);
         spinnerCategory.setAdapter(spinnerAdapter);
 
-
+        //Date Picker button
         btn_datePicker = (Button)v.findViewById(R.id.button_date_add_p);
         btn_datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +71,7 @@ public class PortraitFragment_add extends Fragment
             }
         });
 
-
-
+        //Camera button
         btn_camera = (Button)v.findViewById(R.id.button_photo_take_add_p);
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,12 +87,8 @@ public class PortraitFragment_add extends Fragment
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                //i.setType("image*//*");
                 startActivityForResult(i, 1);
-
-               /* Intent intent = new Intent();
-                intent.setType("image*//*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);*/
             }
         });
 
@@ -111,7 +110,7 @@ public class PortraitFragment_add extends Fragment
             try
             {
                 String date = _year+"."+_month+"."+_day;
-                PortraitFragment_main.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString());
+                PortraitFragment_main.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString(),"0","0");
                 PortraitFragment_main.ListViewAdapter.RefreshList(PortraitFragment_main.dbh.List(PortraitFragment_main.selectedCategory));
                 PortraitFragment_main.ListViewAdapter.notifyDataSetChanged();
                 Toast.makeText(getActivity(),"Item added succesfully!",Toast.LENGTH_SHORT).show();
@@ -170,39 +169,41 @@ public class PortraitFragment_add extends Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if(requestCode == 1)
-        {
-            if(resultCode == RESULT_OK)
+
+        //Camera
+        if (requestCode == 0 ) {
+            if(data.getExtras().get("data") != null)
             {
-                Uri uri = data.getData();
-                String[] projection = {MediaStore.Images.Media.DATA};
-
-                Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri,projection,null,null,null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(projection[0]);
-                String filePath = cursor.getString(columnIndex);
-                cursor.close();
-
-                Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-                Drawable d = new BitmapDrawable(yourSelectedImage);
-                iv.setBackground(d);
+                Bitmap image = (Bitmap) data.getExtras().get("data");
+                iv.setImageBitmap(image);
             }
-        }*/
+        }
+        else
+        {
+            //Album
 
+            if (requestCode == 1 && resultCode == RESULT_OK && null != data) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
+                iv.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            }
 
-        if (data != null) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            Bitmap yourSelectedImage = BitmapFactory.decodeFile(picturePath);
-            Drawable d = new BitmapDrawable(yourSelectedImage);
-            iv.setBackground(d);
-            cursor.close();
-
+            /*if (data != null) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                Bitmap yourSelectedImage = BitmapFactory.decodeFile(picturePath);
+                iv.setImageBitmap(yourSelectedImage);
+                cursor.close();
+            }*/
         }
     }
 }
