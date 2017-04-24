@@ -32,7 +32,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, CATEGORY TEXT, DATE TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT);");
     }
 
     @Override

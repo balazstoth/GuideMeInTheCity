@@ -117,6 +117,7 @@ public class PortraitFragment_add extends Fragment
             }
             catch(SQLiteException ex)
             {
+                //Toast.makeText(getActivity(),ex.getMessage(),Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity(),"Item already added!",Toast.LENGTH_SHORT).show();
             }
         }
@@ -171,7 +172,7 @@ public class PortraitFragment_add extends Fragment
         super.onActivityResult(requestCode, resultCode, data);
 
         //Camera
-        if (requestCode == 0 ) {
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null ) {
             if(data.getExtras().get("data") != null)
             {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
@@ -181,8 +182,7 @@ public class PortraitFragment_add extends Fragment
         else
         {
             //Album
-
-            if (requestCode == 1 && resultCode == RESULT_OK && null != data) {
+            if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
@@ -192,18 +192,6 @@ public class PortraitFragment_add extends Fragment
                 cursor.close();
                 iv.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             }
-
-            /*if (data != null) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                Bitmap yourSelectedImage = BitmapFactory.decodeFile(picturePath);
-                iv.setImageBitmap(yourSelectedImage);
-                cursor.close();
-            }*/
         }
     }
 }
