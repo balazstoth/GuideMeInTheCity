@@ -11,11 +11,11 @@ import java.util.List;
  * Created by tothb on 2017. 04. 19..
  */
 
-public class ListAdapter extends BaseAdapter
+public class PortraitListAdapter extends BaseAdapter
 {
     List<Monument> items;
 
-    public ListAdapter(List<Monument> items)
+    public PortraitListAdapter(List<Monument> items)
     {
         this.items = items;
     }
@@ -42,7 +42,7 @@ public class ListAdapter extends BaseAdapter
         View listItemView = view;
 
         if(listItemView == null)
-            listItemView = View.inflate(parent.getContext(), R.layout.list_monument, null);
+            listItemView = View.inflate(parent.getContext(), R.layout.list_monument_p, null);
 
         TextView textView_monument = (TextView) listItemView.findViewById(R.id.textView_monument);
         textView_monument.setText(monumentString);

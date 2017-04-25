@@ -110,14 +110,13 @@ public class PortraitFragment_add extends Fragment
             try
             {
                 String date = _year+"."+_month+"."+_day;
-                PortraitFragment_main.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString(),"0","0");
+                PortraitFragment_main.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString(),"0","0","false");
                 PortraitFragment_main.ListViewAdapter.RefreshList(PortraitFragment_main.dbh.List(PortraitFragment_main.selectedCategory));
                 PortraitFragment_main.ListViewAdapter.notifyDataSetChanged();
                 Toast.makeText(getActivity(),"Item added succesfully!",Toast.LENGTH_SHORT).show();
             }
             catch(SQLiteException ex)
             {
-                //Toast.makeText(getActivity(),ex.getMessage(),Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity(),"Item already added!",Toast.LENGTH_SHORT).show();
             }
         }

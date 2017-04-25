@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView_landscape_monument_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"/>
+
+    <TextView
+        android:id="@+id/textView_landscape_monument_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_alignStart="@+id/textView_landscape_monument_name"
+        android:layout_below="@+id/textView_landscape_monument_name"
+        android:layout_marginTop="10dp"
+        android:text="TextView"/>
+
+    <TextView
+        android:id="@+id/textView_landscape_monument_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_alignStart="@+id/textView_landscape_monument_date"
+        android:layout_below="@+id/textView_landscape_monument_date"
+        android:layout_marginTop="10dp"
+        android:text="TextView"/>
+</RelativeLayout>

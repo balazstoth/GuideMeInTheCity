@@ -32,7 +32,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    public void Insert(String name,String description, String date, String category, String points, String votes)
+    public void Insert(String name,String description, String date, String category, String points, String votes, String isEnabled)
     {
         ContentValues cv = new ContentValues();
         cv.put("NAME",name);
@@ -51,6 +51,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         cv.put("CATEGORY",category);
         cv.put("POINTS",points);
         cv.put("VOTES",votes);
+        cv.put("ISENABLED",isEnabled);
 
         this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
     }
@@ -67,7 +68,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
 
     public void CreateTable()
     {
-        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT);");
+        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
     }
 
     public void Update(String oldName, String newName)
@@ -88,10 +89,10 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     public List<Monument> List(String category)
     {
         List<Monument> list = new ArrayList<Monument>();
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "'",null);
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "' AND ISENABLED = 'false'" ,null);
         while (cursor.moveToNext())
         {
-            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
+            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7)));
         }
 
         Collections.sort(list);

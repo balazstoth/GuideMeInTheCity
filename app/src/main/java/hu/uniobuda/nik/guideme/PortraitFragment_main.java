@@ -27,7 +27,7 @@ public class PortraitFragment_main extends Fragment
     static ListView elements;
     static String selectedCategory;
     public static DatabaseHelperMonument dbh;
-    static ListAdapter ListViewAdapter;
+    static PortraitListAdapter ListViewAdapter;
     Spinner spinnerCategory;
 
 
@@ -73,7 +73,7 @@ public class PortraitFragment_main extends Fragment
         dbh = new DatabaseHelperMonument(getActivity());
 
         //Select the appropiate items to the list
-        ListViewAdapter = new ListAdapter(dbh.List(spinnerCategory.getSelectedItem().toString()));
+        ListViewAdapter = new PortraitListAdapter(dbh.List(spinnerCategory.getSelectedItem().toString()));
         ListViewAdapter.notifyDataSetChanged();
         elements = (ListView)v.findViewById(R.id.listView_items_p);
         elements.setAdapter(ListViewAdapter);

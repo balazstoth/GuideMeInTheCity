@@ -42,8 +42,9 @@ public class Monument implements Comparable<Monument>
     int points, votes;
     String date;
     String category;
+    String isEnabled;
 
-    public Monument(String name, String description, String date, String category, String points, String votes)
+    public Monument(String name, String description, String date, String category, String points, String votes, String isEnabled)
     {
         this.name = name;
         this.description = description;
@@ -51,6 +52,7 @@ public class Monument implements Comparable<Monument>
         this.category = category;
         this.points = Integer.parseInt(points);
         this.votes = Integer.parseInt(votes);
+        this.isEnabled = isEnabled;
     }
 
     @Override

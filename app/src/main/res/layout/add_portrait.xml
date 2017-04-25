@@ -126,11 +126,23 @@
 
     <ImageView
         android:id="@+id/imageView_add_p"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@android:drawable/ic_delete"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@+id/button_add_add_p"
+        android:layout_alignStart="@+id/textView_photo_add_p"/>
+
+    <TextView
+        android:id="@+id/textView_selectedPicture_add_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_photo_add_p"
         android:layout_alignTop="@+id/button_add_add_p"
-        android:layout_toEndOf="@+id/textView_date_add_p"
-        android:layout_marginTop="29dp"/>
+        android:layout_marginTop="12dp"
+        android:textSize="18dp"
+        android:layout_above="@+id/imageView_add_p"
+        android:text="Selected picture:"
+        android:layout_toStartOf="@+id/button_photo_take_add_p"
+        android:layout_alignEnd="@+id/imageView_add_p"/>
 
 </RelativeLayout>
