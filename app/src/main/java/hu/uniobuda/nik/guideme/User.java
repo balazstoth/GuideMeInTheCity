@@ -6,7 +6,7 @@ package hu.uniobuda.nik.guideme;
 
 public class User {
     int id;
-    String email, username, password;
+    String name, email, username, password;
 
     public void  setId(int id)
     {
@@ -16,6 +16,8 @@ public class User {
     {
         return this.id;
     }
+    public void setName(String name){ this.name = name;}
+    public  String getName() {return  this.name;}
     public void setEmail(String email)
     {
         this.email = email;

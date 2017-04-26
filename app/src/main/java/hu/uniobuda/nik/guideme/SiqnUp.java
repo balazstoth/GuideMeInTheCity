@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,22 +38,42 @@ public class SiqnUp extends Activity {
             @Override
             public void onClick(View v) {
                 User user = new User();
-                user.setEmail(editEmail.getText().toString());
-                user.setUsername(editUserName.getText().toString());
-                user.setPassword(editPassword.getText().toString());
+                if(!(editName.getText().toString().equals("") ||
+                        editEmail.getText().toString().equals("") ||
+                        editUserName.getText().toString().equals("") ||
+                        editPassword.getText().toString().equals("")))
+                {
+                    user.setName(editName.getText().toString());
+                    user.setEmail(editEmail.getText().toString());
+                    user.setUsername(editUserName.getText().toString());
+                    user.setPassword(editPassword.getText().toString());
 
-                if(helper.CheckUserName(user.getUsername()) == 1){
-                    helper.insertUser(user);
-                    Toast.makeText(SiqnUp.this,"User Created!", Toast.LENGTH_LONG).show();
+                    if(isValidEmail(editEmail.getText().toString()))
+                    {
+                        if(helper.CheckUserName(user.getUsername()) == 1){
+                            helper.insertUser(user);
+                            Toast.makeText(SiqnUp.this,"User Created!", Toast.LENGTH_LONG).show();
 
-                    //displayActivity.putExtra("UserName", user.getUsername());
-                    startActivity(loginActivity);
+                            //displayActivity.putExtra("UserName", user.getUsername());
+                            startActivity(loginActivity);
+                        }
+                        else{
+                            Toast.makeText(SiqnUp.this,"This username still exists!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(SiqnUp.this,"Please add valid email!", Toast.LENGTH_LONG).show();
+                    }
                 }
-                 else{
-                    Toast.makeText(SiqnUp.this,"This username still exists!", Toast.LENGTH_LONG).show();
+                else{
+                    Toast.makeText(SiqnUp.this,"Please fill all fields!", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/signup"
+    android:background="@drawable/background"
     tools:context="hu.uniobuda.nik.guideme.SiqnUp">
 
     <TextView
@@ -74,17 +75,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/passwordText"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/login_btn_login"
+        android:layout_centerHorizontal="true"
         android:text="Sign Up" />
 
 </RelativeLayout>
