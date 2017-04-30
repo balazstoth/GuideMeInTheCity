@@ -2,7 +2,9 @@ package hu.uniobuda.nik.guideme;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by tothb on 2017. 03. 21..
@@ -55,10 +57,13 @@ public class Monument implements Comparable<Monument>
         this.isEnabled = isEnabled;
     }
 
+
     @Override
     public int compareTo(@NonNull Monument o)
     {
         return this.name.compareTo(o.name);
     }
+
+
 }
 
