@@ -30,7 +30,6 @@ public class LandscapeFragment_main extends Fragment
 
     static ListView elements;
     static String selectedCategory;
-    public static DatabaseHelperMonument dbh;
     static LandscapeListAdapter ListViewAdapter;
 
     @Override
@@ -50,7 +49,7 @@ public class LandscapeFragment_main extends Fragment
             {
                //Toast.makeText(getActivity(),categories_string.get(position),Toast.LENGTH_SHORT).show();
                 selectedCategory = categories_string.get(position);
-                ListViewAdapter.RefreshList(LandscapeFragment_main.dbh.List(selectedCategory));
+                ListViewAdapter.RefreshList(LoginActivity.dbh.List(selectedCategory));
                 ListViewAdapter.notifyDataSetChanged();
             }
         });
@@ -66,11 +65,9 @@ public class LandscapeFragment_main extends Fragment
             }
         });
 
-        //Create new dataBase object
-        dbh = new DatabaseHelperMonument(getActivity());
 
         //Select the appropiate items to the list
-        ListViewAdapter = new LandscapeListAdapter(dbh.List(selectedCategory));
+        ListViewAdapter = new LandscapeListAdapter(LoginActivity.dbh.List(selectedCategory));
         ListViewAdapter.notifyDataSetChanged();
         elements = (ListView)v.findViewById(R.id.listView_items_l);
         elements.setAdapter(ListViewAdapter);

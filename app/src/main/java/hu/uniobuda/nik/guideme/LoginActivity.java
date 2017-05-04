@@ -14,6 +14,7 @@ public class LoginActivity extends Activity {
     Button btn_create, btn_login;
     EditText editName, editPassword;
     DatabaseHelperUser helper;
+    public static DatabaseHelperMonument dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class LoginActivity extends Activity {
 
         final Intent userActivity = new Intent(this, SiqnUp.class);
         final Intent displayActivity = new Intent(this, Display.class);
+
+        //Create new dataBase object
+        dbh = new DatabaseHelperMonument(LoginActivity.this);
 
         btn_tourist.setOnClickListener(new View.OnClickListener() {
             @Override

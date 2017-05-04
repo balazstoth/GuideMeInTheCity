@@ -26,7 +26,7 @@ public class PortraitFragment_main extends Fragment
     List<String> categories_string = new ArrayList<String>();
     static ListView elements;
     static String selectedCategory;
-    public static DatabaseHelperMonument dbh;
+    //public static DatabaseHelperMonument dbh;
     static PortraitListAdapter ListViewAdapter;
     Spinner spinnerCategory;
 
@@ -50,7 +50,7 @@ public class PortraitFragment_main extends Fragment
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 selectedCategory = spinnerCategory.getSelectedItem().toString();
-                ListViewAdapter.RefreshList(PortraitFragment_main.dbh.List(selectedCategory));
+                ListViewAdapter.RefreshList(LoginActivity.dbh.List(selectedCategory));
                 ListViewAdapter.notifyDataSetChanged();
             }
 
@@ -70,10 +70,10 @@ public class PortraitFragment_main extends Fragment
         });
 
         //Create new dataBase object
-        dbh = new DatabaseHelperMonument(getActivity());
+        //dbh = new DatabaseHelperMonument(getActivity());
 
         //Select the appropiate items to the list
-        ListViewAdapter = new PortraitListAdapter(dbh.List(spinnerCategory.getSelectedItem().toString()));
+        ListViewAdapter = new PortraitListAdapter(LoginActivity.dbh.List(spinnerCategory.getSelectedItem().toString()));
         ListViewAdapter.notifyDataSetChanged();
         elements = (ListView)v.findViewById(R.id.listView_items_p);
         elements.setAdapter(ListViewAdapter);
