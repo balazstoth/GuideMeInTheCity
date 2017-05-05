@@ -25,14 +25,14 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     public DatabaseHelperMonument(Context context)
     {
         super(context, DATABASE_NAME, null, 1);
-        //DeleteTable();
-        //CreateTable();
+        DeleteTable();
+        CreateTable();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT, PICTURE BLOB);");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    public void Insert(String name,String description, String date, String category, String points, String votes, String isEnabled)
+    public void Insert(String name,String description, String date, String category, String points, String votes, String isEnabled, byte[] picture)
     {
         ContentValues cv = new ContentValues();
         cv.put("NAME",name);
@@ -52,7 +52,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         cv.put("POINTS",points);
         cv.put("VOTES",votes);
         cv.put("ISENABLED",isEnabled);
-
+        cv.put("PICTURE",picture);
         this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
     }
 
@@ -68,7 +68,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
 
     public void CreateTable()
     {
-        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
+        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT, PICTURE BLOB);");
     }
 
     public void Update(String oldName, String newName)
@@ -92,9 +92,8 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "' AND ISENABLED = 'false'" ,null);
         while (cursor.moveToNext())
         {
-            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7)));
+            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7),BitmapConvert.fromBytesToImage(cursor.getBlob(8))));
         }
-
         Collections.sort(list);
         return list;
     }

@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -39,7 +42,7 @@ public class AddActivity extends Activity
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
     ImageView iv;
-
+    Bitmap picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +104,7 @@ public class AddActivity extends Activity
                     try
                     {
                         String date = _year+"."+_month+"."+_day;
-                        LoginActivity.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString(),"0","0","false");
+                        LoginActivity.dbh.Insert(editText_name.getText().toString(),editText_desc.getText().toString(),date,spnr_category.getSelectedItem().toString(),"0","0","false",BitmapConvert.fromImageToBytes(picture));
 
                         if(PortraitFragment_main.selectedCategory != null)
                         {
@@ -139,6 +142,13 @@ public class AddActivity extends Activity
             Toast.makeText(AddActivity.this,"Select a date!",Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if(picture == null)
+        {
+            Toast.makeText(AddActivity.this,"Select a picture!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
     }
 
@@ -178,6 +188,7 @@ public class AddActivity extends Activity
             {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 iv.setImageBitmap(image);
+                picture = image;
             }
         }
         else
@@ -185,13 +196,24 @@ public class AddActivity extends Activity
             //Album
             if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                try
+                {
+                    InputStream is = getContentResolver().openInputStream(selectedImage);
+                    Bitmap image = BitmapFactory.decodeStream(is);
+                    iv.setImageBitmap(image);
+                    picture = image;
+                } catch (FileNotFoundException e)
+                {
+                    e.getMessage();
+                }
+
+               /* String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
                 cursor.moveToFirst();
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 String picturePath = cursor.getString(columnIndex);
                 cursor.close();
-                iv.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                iv.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
             }
         }
     }

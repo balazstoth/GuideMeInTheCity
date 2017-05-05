@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class LandscapeFragment_main extends Fragment
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
     ListView categories;
+    TextView textView_selectedCategory;
 
     static ListView elements;
     static String selectedCategory;
@@ -35,6 +37,7 @@ public class LandscapeFragment_main extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.main_landscape, container, false);
+        textView_selectedCategory = (TextView) v.findViewById(R.id.textView_selectedCategory2_l);
 
         //Set categories
         CopyCategories();
@@ -49,6 +52,7 @@ public class LandscapeFragment_main extends Fragment
             {
                //Toast.makeText(getActivity(),categories_string.get(position),Toast.LENGTH_SHORT).show();
                 selectedCategory = categories_string.get(position);
+                textView_selectedCategory.setText(selectedCategory);
                 ListViewAdapter.RefreshList(LoginActivity.dbh.List(selectedCategory));
                 ListViewAdapter.notifyDataSetChanged();
             }
@@ -71,6 +75,9 @@ public class LandscapeFragment_main extends Fragment
         ListViewAdapter.notifyDataSetChanged();
         elements = (ListView)v.findViewById(R.id.listView_items_l);
         elements.setAdapter(ListViewAdapter);
+
+        //Set selected category label
+        textView_selectedCategory.setText(selectedCategory);
 
         return v;
     }

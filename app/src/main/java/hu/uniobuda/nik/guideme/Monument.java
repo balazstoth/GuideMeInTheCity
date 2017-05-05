@@ -1,5 +1,6 @@
 package hu.uniobuda.nik.guideme;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
@@ -35,6 +36,11 @@ public class Monument implements Comparable<Monument>
         return category;
     }
 
+    public Bitmap getPicture()
+    {
+        return picture;
+    }
+
     String name;
     Coordinate coordinate;
     String description;
@@ -43,8 +49,9 @@ public class Monument implements Comparable<Monument>
     String date;
     String category;
     String isEnabled;
+    Bitmap picture;
 
-    public Monument(String name, String description, String date, String category, String points, String votes, String isEnabled)
+    public Monument(String name, String description, String date, String category, String points, String votes, String isEnabled, Bitmap picture)
     {
         this.name = name;
         this.description = description;
@@ -53,6 +60,7 @@ public class Monument implements Comparable<Monument>
         this.points = Integer.parseInt(points);
         this.votes = Integer.parseInt(votes);
         this.isEnabled = isEnabled;
+        this.picture = picture;
     }
 
     @Override

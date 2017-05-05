@@ -63,7 +63,7 @@ public class Display extends Activity {
         monumentList = new ArrayList<Monument>();
         while (cursor.moveToNext())
         {
-            monumentList.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7)));
+            monumentList.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7), BitmapConvert.fromBytesToImage(cursor.getBlob(8))));
         }
 
         adapter = new ArrayAdapter<Monument>(this, android.R.layout.simple_list_item_1, monumentList);

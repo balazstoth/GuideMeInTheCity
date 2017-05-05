@@ -1,8 +1,10 @@
 package hu.uniobuda.nik.guideme;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,6 +43,7 @@ public class LandscapeListAdapter extends BaseAdapter
         String nameString = "Name: " + c.getName();
         String dateString = "Built in: " + c.getDate();
         String descString = "Description: " + c.getDescription();
+        Bitmap picture = c.getPicture();
         View listItemView = view;
 
         if(listItemView == null)
@@ -49,10 +52,12 @@ public class LandscapeListAdapter extends BaseAdapter
         TextView textView_monument_name = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_name);
         TextView textView_monument_date = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_date);
         TextView textView_monument_desc = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_desc);
+        ImageView imageView_monument_picture = (ImageView) listItemView.findViewById(R.id.imageView_landscape_monument_picture);
 
         textView_monument_name.setText(nameString);
         textView_monument_date.setText(dateString);
         textView_monument_desc.setText(descString);
+        imageView_monument_picture.setImageBitmap(picture);
         return listItemView;
     }
 
