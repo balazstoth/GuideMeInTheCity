@@ -82,6 +82,11 @@ public class LandscapeFragment_main extends Fragment
         return v;
     }
 
+    public static void RefreshList()
+    {
+        ListViewAdapter.RefreshList(LoginActivity.dbh.List(selectedCategory));
+        ListViewAdapter.notifyDataSetChanged();
+    }
 
     private void CopyCategories()
     {
