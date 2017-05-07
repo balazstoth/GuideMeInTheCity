@@ -25,8 +25,8 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     public DatabaseHelperMonument(Context context)
     {
         super(context, DATABASE_NAME, null, 1);
-        DeleteTable();
-        CreateTable();
+        //DeleteTable();
+        //CreateTable();
     }
 
     @Override
@@ -54,6 +54,11 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         cv.put("ISENABLED",isEnabled);
         cv.put("PICTURE",picture);
         this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
+    }
+
+    public void RefreshRating(String name, float newPoints, int newVotes)
+    {
+        this.getWritableDatabase().execSQL("UPDATE " + TABLE_NAME + " SET POINTS = '" + newPoints + "', VOTES = '" + newVotes + "' WHERE NAME LIKE '" + name + "'");
     }
 
     public void Delete(String name)

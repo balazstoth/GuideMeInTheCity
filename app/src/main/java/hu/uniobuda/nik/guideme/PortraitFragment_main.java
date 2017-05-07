@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class PortraitFragment_main extends Fragment
     static String selectedCategory;
     static PortraitListAdapter ListViewAdapter;
     Spinner spinnerCategory;
+    static Monument selectedMonument;
 
 
     @Override
@@ -74,7 +76,25 @@ public class PortraitFragment_main extends Fragment
         elements = (ListView)v.findViewById(R.id.listView_items_p);
         elements.setAdapter(ListViewAdapter);
 
+        elements.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                List<Monument> m = LoginActivity.dbh.List(selectedCategory);
+                selectedMonument = m.get(position);
+                Intent details = new Intent(getActivity(),DetailsActivity.class);
+                startActivity(details);
+            }
+        });
+
         return v;
+    }
+
+    public static void RefreshList()
+    {
+        ListViewAdapter.RefreshList(LoginActivity.dbh.List(selectedCategory));
+        ListViewAdapter.notifyDataSetChanged();
     }
 
     private void CopyCategories()

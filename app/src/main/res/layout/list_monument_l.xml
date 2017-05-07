@@ -6,6 +6,16 @@
 
 
     <TextView
+        android:id="@+id/textView_landscape_monument_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_landscape_monument_date"
+        android:layout_below="@+id/textView_landscape_monument_date"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textSize="18dp"/>
+
+    <TextView
         android:id="@+id/textView_landscape_monument_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,17 +42,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:layout_alignStart="@+id/textView_landscape_monument_date"
-        android:layout_below="@+id/textView_landscape_monument_date"
-        android:layout_marginTop="10dp"
-        android:text="TextView"/>
+        android:text="TextView"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/textView_landscape_monument_rate"
+        android:layout_alignStart="@+id/textView_landscape_monument_rate"/>
 
     <ImageView
         android:id="@+id/imageView_landscape_monument_picture"
         android:layout_width="160dp"
         android:layout_height="90dp"
-        android:layout_alignStart="@+id/textView_landscape_monument_desc"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/textView_landscape_monument_desc"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_alignStart="@+id/textView_landscape_monument_desc"/>
 </RelativeLayout>

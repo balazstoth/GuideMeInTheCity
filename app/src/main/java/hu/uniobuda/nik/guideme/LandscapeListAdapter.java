@@ -43,6 +43,7 @@ public class LandscapeListAdapter extends BaseAdapter
         String nameString = "Name: " + c.getName();
         String dateString = "Built in: " + c.getDate();
         String descString = "Description: " + c.getDescription();
+        String rating = "Rating: " + c.getRate();
         Bitmap picture = c.getPicture();
         View listItemView = view;
 
@@ -52,11 +53,13 @@ public class LandscapeListAdapter extends BaseAdapter
         TextView textView_monument_name = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_name);
         TextView textView_monument_date = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_date);
         TextView textView_monument_desc = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_desc);
+        TextView textView_monument_rating = (TextView) listItemView.findViewById(R.id.textView_landscape_monument_rate);
         ImageView imageView_monument_picture = (ImageView) listItemView.findViewById(R.id.imageView_landscape_monument_picture);
 
         textView_monument_name.setText(nameString);
         textView_monument_date.setText(dateString);
         textView_monument_desc.setText(descString);
+        textView_monument_rating.setText(rating);
         imageView_monument_picture.setImageBitmap(picture);
         return listItemView;
     }

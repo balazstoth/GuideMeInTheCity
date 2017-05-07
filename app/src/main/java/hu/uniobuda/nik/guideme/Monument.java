@@ -21,7 +21,7 @@ public class Monument implements Comparable<Monument>
         return description;
     }
 
-    public double getRate()
+    public float getRate()
     {
         return votes == 0 ? 0 : points / votes;
     }
@@ -41,11 +41,32 @@ public class Monument implements Comparable<Monument>
         return picture;
     }
 
+    public int getVotes()
+    {
+        return votes;
+    }
+
+    public void setVotes(int votes)
+    {
+        this.votes = votes;
+    }
+
+    public float getPoints()
+    {
+        return points;
+    }
+
+    public void setPoints(float points)
+    {
+        this.points = points;
+    }
+
     String name;
     Coordinate coordinate;
     String description;
     String numberOfVisitors;
-    int points, votes;
+    float points;
+    int votes;
     String date;
     String category;
     String isEnabled;
@@ -57,7 +78,7 @@ public class Monument implements Comparable<Monument>
         this.description = description;
         this.date = date;
         this.category = category;
-        this.points = Integer.parseInt(points);
+        this.points = Float.parseFloat(points);
         this.votes = Integer.parseInt(votes);
         this.isEnabled = isEnabled;
         this.picture = picture;
