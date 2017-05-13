@@ -149,10 +149,8 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-        // Now create a location manager
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        // This is the Best And IMPORTANT part
         Looper looper = null;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -165,8 +163,8 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
                 }, 10);
                 //return;
             }
-
         }
+
         locationManager.requestSingleUpdate(criteria, locationListener, looper);
 
         btn_add.setOnClickListener(new View.OnClickListener() {
