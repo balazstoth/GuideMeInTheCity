@@ -1,17 +1,16 @@
 package hu.uniobuda.nik.guideme;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+
+import hu.uniobuda.nik.guideme.Models.Monument;
 
 /**
  * Created by tothb on 2017. 04. 16..
@@ -32,7 +31,8 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT," +
+                " POINTS TEXT , VOTES TEXT, ISENABLED TEXT, LATITUDE FLOAT, LONGITUDE FLOAT);");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    public void Insert(String name,String description, String date, String category, String points, String votes, String isEnabled)
+    public void Insert(String name,String description, String date, String category, String points, String votes, String isEnabled, double latitude, double longitude)
     {
         ContentValues cv = new ContentValues();
         cv.put("NAME",name);
@@ -52,6 +52,8 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
         cv.put("POINTS",points);
         cv.put("VOTES",votes);
         cv.put("ISENABLED",isEnabled);
+        cv.put("LATITUDE",latitude);
+        cv.put("LONGITUDE",longitude);
 
         this.getWritableDatabase().insertOrThrow(TABLE_NAME,null,cv);
     }
@@ -68,7 +70,7 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
 
     public void CreateTable()
     {
-        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT);");
+        this.getWritableDatabase().execSQL("CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT UNIQUE, DESC TEXT, DATE TEXT, CATEGORY TEXT, POINTS TEXT, VOTES TEXT, ISENABLED TEXT, LATITUDE FLOAT, LONGITUDE FLOAT);");
     }
 
     public void Update(String oldName, String newName)
@@ -89,10 +91,10 @@ public class DatabaseHelperMonument extends SQLiteOpenHelper
     public List<Monument> List(String category)
     {
         List<Monument> list = new ArrayList<Monument>();
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "' AND ISENABLED = 'false'" ,null);
+        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY = '" + category + "' AND ISENABLED != 'false'" ,null);
         while (cursor.moveToNext())
         {
-            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7)));
+            list.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getInt(5), cursor.getInt(6),cursor.getString(7), cursor.getDouble(8), cursor.getDouble(9)));
         }
 
         Collections.sort(list);

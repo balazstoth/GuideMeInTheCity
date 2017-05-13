@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:id="@+id/signup"
     android:background="@drawable/background"
-    tools:context="hu.uniobuda.nik.guideme.SiqnUp">
+    tools:context="hu.uniobuda.nik.guideme.SiqnUpActivity">
 
     <TextView
         android:layout_width="wrap_content"

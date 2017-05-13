@@ -19,13 +19,24 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_below="@+id/textwelcome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/emptyString" />
+
+    <TextView
+        android:id="@+id/pendings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.00"
+        android:text="Pending monuments:"
+        android:layout_below="@+id/userName"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
     <ListView
         android:id="@+id/monumentsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userName"></ListView>
+        android:layout_below="@+id/pendings">
+    </ListView>
 
 </RelativeLayout>

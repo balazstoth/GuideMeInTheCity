@@ -3,18 +3,19 @@ package hu.uniobuda.nik.guideme;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import hu.uniobuda.nik.guideme.Models.User;
+
 /**
  * Created by Tamás on 2017. 04. 22..
  */
 
-public class SiqnUp extends Activity {
+public class SiqnUpActivity extends Activity {
     EditText editName, editEmail, editUserName, editPassword;
     Button signupButton;
     DatabaseHelperUser helper = new DatabaseHelperUser(this);
@@ -38,10 +39,10 @@ public class SiqnUp extends Activity {
             @Override
             public void onClick(View v) {
                 User user = new User();
-                if(!(editName.getText().toString().equals("") ||
-                        editEmail.getText().toString().equals("") ||
-                        editUserName.getText().toString().equals("") ||
-                        editPassword.getText().toString().equals("")))
+                if(!(editName.getText().toString().matches("") ||
+                        editEmail.getText().toString().matches("") ||
+                        editUserName.getText().toString().matches("") ||
+                        editPassword.getText().toString().matches("")))
                 {
                     user.setName(editName.getText().toString());
                     user.setEmail(editEmail.getText().toString());
@@ -52,21 +53,22 @@ public class SiqnUp extends Activity {
                     {
                         if(helper.CheckUserName(user.getUsername()) == 1){
                             helper.insertUser(user);
-                            Toast.makeText(SiqnUp.this,"User Created!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SiqnUpActivity.this,"User Created!", Toast.LENGTH_LONG).show();
 
                             //displayActivity.putExtra("UserName", user.getUsername());
                             startActivity(loginActivity);
+                            finish();
                         }
                         else{
-                            Toast.makeText(SiqnUp.this,"This username still exists!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SiqnUpActivity.this,"This username still exists!", Toast.LENGTH_LONG).show();
                         }
                     }
                     else{
-                        Toast.makeText(SiqnUp.this,"Please add valid email!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SiqnUpActivity.this,"Please add valid email!", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
-                    Toast.makeText(SiqnUp.this,"Please fill all fields!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SiqnUpActivity.this,"Please fill all fields!", Toast.LENGTH_LONG).show();
                 }
 
             }

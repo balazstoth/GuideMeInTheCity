@@ -1,10 +1,9 @@
-package hu.uniobuda.nik.guideme;
+package hu.uniobuda.nik.guideme.Models;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by tothb on 2017. 03. 21..
@@ -45,18 +44,21 @@ public class Monument implements Comparable<Monument>
     String date;
     String category;
     String isEnabled;
+    double latitude, longitude;
 
-    public Monument(String name, String description, String date, String category, String points, String votes, String isEnabled)
+    public Monument(String name, String description, String date, String category, int points, int votes, String isEnabled, double latitude, double longitude)
     {
         this.name = name;
         this.description = description;
         this.date = date;
         this.category = category;
-        this.points = Integer.parseInt(points);
-        this.votes = Integer.parseInt(votes);
+        this.points = points;
+        this.votes = votes;
         this.isEnabled = isEnabled;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
-
+    public  Monument(){}
 
     @Override
     public int compareTo(@NonNull Monument o)
@@ -64,6 +66,9 @@ public class Monument implements Comparable<Monument>
         return this.name.compareTo(o.name);
     }
 
-
+    @Override
+    public String toString(){
+        return "Name: " + this.getName() + "\n" + "Built in: " + this.getDate() + ", Rate: " + this.getRate();
+    }
 }
 

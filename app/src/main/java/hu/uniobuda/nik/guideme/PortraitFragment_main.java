@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import hu.uniobuda.nik.guideme.Models.Category;
+
 /**
  * Created by tothb on 2017. 04. 09..
  */
 
-public class PortraitFragment_main extends Fragment
-{
+public class PortraitFragment_main extends Fragment {
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
     static ListView elements;
@@ -39,7 +40,7 @@ public class PortraitFragment_main extends Fragment
         //Set the spinner
         CopyCategories();
         spinnerCategory = (Spinner) v.findViewById(R.id.spinner_category_p);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categories_string);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, categories_string);
         spinnerCategory.setAdapter(spinnerAdapter);
 
         //Set OnItemSelected event for spinner

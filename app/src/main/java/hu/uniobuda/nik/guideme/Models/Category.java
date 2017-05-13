@@ -1,4 +1,4 @@
-package hu.uniobuda.nik.guideme;
+package hu.uniobuda.nik.guideme.Models;
 
 /**
  * Created by tothb on 2017. 03. 21..

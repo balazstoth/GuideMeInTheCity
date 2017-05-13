@@ -3,6 +3,7 @@
     package="hu.uniobuda.nik.guideme">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -30,8 +31,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddActivity"></activity>
-        <activity android:name=".SiqnUp"></activity>
-        <activity android:name=".Display"></activity>
+        <activity android:name=".SiqnUpActivity"></activity>
+        <activity android:name=".DisplayActivity"></activity>
     </application>
 
 </manifest>

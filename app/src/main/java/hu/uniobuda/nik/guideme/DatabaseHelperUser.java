@@ -1,13 +1,12 @@
 package hu.uniobuda.nik.guideme;
 
-import android.app.Activity;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+
+import hu.uniobuda.nik.guideme.Models.User;
 
 /**
  * Created by Tamás on 2017. 04. 22..

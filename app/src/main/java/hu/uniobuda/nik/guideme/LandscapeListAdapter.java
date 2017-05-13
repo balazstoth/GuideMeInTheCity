@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import hu.uniobuda.nik.guideme.Models.Monument;
+
 /**
  * Created by tothb on 2017. 04. 25..
  */
