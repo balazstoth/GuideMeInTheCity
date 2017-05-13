@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ import java.util.List;
 import hu.uniobuda.nik.guideme.Models.Category;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 
 /**
  * Created by tothb on 2017. 04. 10..
@@ -60,10 +62,11 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
     List<Category> categories_enum = Arrays.asList(Category.values());
     List<String> categories_string = new ArrayList<String>();
     ImageView iv;
-    Location mlocation;
 
+    Location mlocation;
     LocationManager mLocationManager;
     Criteria criteria;
+    Bitmap image;
 
     final LocationListener locationListener = new LocationListener() {
         @Override
@@ -163,6 +166,9 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
                 }, 10);
                 //return;
             }
+            else {
+                mLocationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+            }
         }
 
         locationManager.requestSingleUpdate(criteria, locationListener, looper);
@@ -178,9 +184,10 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
 
                         double longit = mlocation.getLongitude();
                         double latit = mlocation.getLatitude();
-                        PortraitFragment_main.dbh.Insert(editText_name.getText().toString(), editText_desc.getText().toString(),
-                                date, spnr_category.getSelectedItem().toString(), "", "", "false", latit, longit);
-                        PortraitFragment_main.ListViewAdapter.RefreshList(PortraitFragment_main.dbh.List(PortraitFragment_main.selectedCategory));
+
+                        LoginActivity.dbh.Insert(editText_name.getText().toString(), editText_desc.getText().toString(),
+                                date, spnr_category.getSelectedItem().toString(), "", "", "false",BitmapConvert.fromImageToBytes(image), latit, longit);
+                        PortraitFragment_main.ListViewAdapter.RefreshList(LoginActivity.dbh.List(PortraitFragment_main.selectedCategory));
 
                         PortraitFragment_main.ListViewAdapter.notifyDataSetChanged();
                         Toast.makeText(getActivity(), "Item added succesfully!", Toast.LENGTH_SHORT).show();
@@ -239,7 +246,7 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
         //Camera
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             if (data.getExtras().get("data") != null) {
-                Bitmap image = (Bitmap) data.getExtras().get("data");
+                image = (Bitmap) data.getExtras().get("data");
                 iv.setImageBitmap(image);
             }
         } else {
@@ -268,4 +275,16 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
     public void onProviderDisabled(String arg0) {}
     public void onProviderEnabled(String arg0) {}
     public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 10: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    mLocationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+            }
+        }
+    }
 }

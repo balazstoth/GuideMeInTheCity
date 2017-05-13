@@ -2,6 +2,7 @@ package hu.uniobuda.nik.guideme;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,6 +30,7 @@ public class DisplayActivity extends Activity {
     ListView listView;
     ArrayAdapter<Monument> adapter;
     Bundle actbundle;
+    Monument actMonument;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class DisplayActivity extends Activity {
         monumentList = new ArrayList<Monument>();
         while (cursor.moveToNext())
         {
-            monumentList.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getInt(6),cursor.getString(7), cursor.getDouble(8), cursor.getDouble(9)));
+            monumentList.add(new Monument(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),cursor.getString(7), BitmapConvert.fromBytesToImage(cursor.getBlob(8)), cursor.getDouble(9), cursor.getDouble(10)));
         }
 
         adapter = new ArrayAdapter<Monument>(this, android.R.layout.simple_list_item_1, monumentList);
@@ -82,7 +84,7 @@ public class DisplayActivity extends Activity {
                     Monument actmon = selected;
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Cursor cursor = helper.getReadableDatabase().rawQuery("select * from Monuments where NAME = '"+actmon.getName()+"'", null);
+
                         String update = "UPDATE Monuments SET ISENABLED = 'ok' WHERE NAME = '"+actmon.getName()+
                                 "' and DATE = '"+actmon.getDate()+"' and CATEGORY = '"+actmon.getCategory()+"' and DESC = '"+actmon.getDescription()+"'" +
                                 "and ISENABLED = 'false'";

@@ -33,7 +33,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:textSize="18dp"
-        android:text="Select item" />
+        android:text="Select an item  |  " />
 
     <ListView
         android:id="@+id/listView_items_l"
@@ -49,13 +49,30 @@
         android:layout_height="40dp"
         android:layout_alignEnd="@+id/listView_items_p"
         android:layout_alignParentRight="true"
-
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-
         android:background="@drawable/floating_button"
         android:text="+"
         android:textSize="30dp"
         android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/textView_selectedCategory1_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Category:"
+        android:layout_marginStart="135dp"
+        android:layout_above="@+id/listView_items_l"
+        android:layout_alignStart="@+id/textView_items_l"/>
+
+    <TextView
+        android:id="@+id/textView_selectedCategory2_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_selectedCategory1_l"
+        android:layout_marginStart="12dp"
+        android:textSize="18dp"
+        android:layout_toEndOf="@+id/textView_selectedCategory1_l"/>
 
 </RelativeLayout>

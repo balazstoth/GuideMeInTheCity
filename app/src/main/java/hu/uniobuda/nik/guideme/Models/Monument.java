@@ -1,8 +1,10 @@
 package hu.uniobuda.nik.guideme.Models;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 /**
@@ -21,7 +23,7 @@ public class Monument implements Comparable<Monument>
         return description;
     }
 
-    public double getRate()
+    public float getRate()
     {
         return votes == 0 ? 0 : points / votes;
     }
@@ -36,25 +38,58 @@ public class Monument implements Comparable<Monument>
         return category;
     }
 
+    public Bitmap getPicture()
+    {
+        return picture;
+    }
+
+    public int getVotes()
+    {
+        return votes;
+    }
+
+    public void setVotes(int votes)
+    {
+        this.votes = votes;
+    }
+
+    public float getPoints()
+    {
+        return points;
+    }
+    public double getLatitude(){return latitude;}
+
+    public double getLongitude(){return longitude;}
+
+    public void setPoints(float points)
+    {
+        this.points = points;
+    }
+
     String name;
     Coordinate coordinate;
     String description;
     String numberOfVisitors;
-    int points, votes;
+    float points;
+    int votes;
     String date;
     String category;
     String isEnabled;
     double latitude, longitude;
 
-    public Monument(String name, String description, String date, String category, int points, int votes, String isEnabled, double latitude, double longitude)
+    Bitmap picture;
+
+    public Monument(String name, String description, String date, String category, String points, String votes, String isEnabled, Bitmap picture, double latitude, double longitude)
     {
         this.name = name;
         this.description = description;
         this.date = date;
         this.category = category;
-        this.points = points;
-        this.votes = votes;
         this.isEnabled = isEnabled;
+        this.points = Float.parseFloat(points);
+        this.votes = Integer.parseInt(votes);
+        this.isEnabled = isEnabled;
+        this.picture = picture;
         this.latitude = latitude;
         this.longitude = longitude;
     }
