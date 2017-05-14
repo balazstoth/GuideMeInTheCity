@@ -94,12 +94,12 @@ public class LoginActivity extends Activity {
                 criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
                 criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
                 Looper looper = null;
                 //Context context = getCont Context;
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                             ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{
@@ -111,9 +111,9 @@ public class LoginActivity extends Activity {
                     } else {
                         mLocationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
                     }
-                }
+                //}
 
-                locationManager.requestSingleUpdate(criteria, locationListener, looper);
+                mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
 
                 startActivity(touristActivity);
             }

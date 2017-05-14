@@ -146,7 +146,7 @@ public class AddActivity extends Activity
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         Looper looper = null;
 
@@ -164,7 +164,7 @@ public class AddActivity extends Activity
             }
         }
 
-        locationManager.requestSingleUpdate(criteria, locationListener, looper);
+        mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
 
         btn_add.setOnClickListener(new View.OnClickListener()
         {

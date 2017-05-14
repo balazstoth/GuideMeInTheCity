@@ -93,7 +93,7 @@ public class PortraitFragment_main extends Fragment {
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         Looper looper = null;
 
@@ -112,7 +112,7 @@ public class PortraitFragment_main extends Fragment {
             }
         }
 
-        locationManager.requestSingleUpdate(criteria, locationListener, looper);
+        mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
 
         View v = inflater.inflate(R.layout.main_portrait,container,false);
 

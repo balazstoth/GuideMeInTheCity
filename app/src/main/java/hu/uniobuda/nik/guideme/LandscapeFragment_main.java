@@ -88,7 +88,7 @@ public class LandscapeFragment_main extends Fragment
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         Looper looper = null;
 
@@ -106,7 +106,7 @@ public class LandscapeFragment_main extends Fragment
             }
         }
 
-        locationManager.requestSingleUpdate(criteria, locationListener, looper);
+        mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
 
         View v = inflater.inflate(R.layout.main_landscape, container, false);
         textView_selectedCategory = (TextView) v.findViewById(R.id.textView_selectedCategory2_l);
