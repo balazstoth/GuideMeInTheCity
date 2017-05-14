@@ -43,16 +43,16 @@ public class DisplayActivity extends Activity {
         tv.setText(username);
     }
 
-    public List<String> toList(List<Monument> list)
+    /*public List<String> toList(List<Monument> list)
     {
         List<String> retList = new ArrayList<String>();
         for(int i=0;i<list.size();i++)
         {
-            retList.add("Name: " + list.get(i).getName() + "\n" + "Built in: " + list.get(i).getDate() + ", Rate: " + list.get(i).getRate());
+            retList.add("Name: " + list.get(i).getName() + "\n" + "Built in: " + list.get(i).getDate() + ", Description: " + list.get(i).getDescription());
         }
 
         return retList;
-    }
+    }*/
 
     public void QueryMonuments()
     {

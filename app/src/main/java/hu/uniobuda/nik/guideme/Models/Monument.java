@@ -103,7 +103,7 @@ public class Monument implements Comparable<Monument>
 
     @Override
     public String toString(){
-        return "Name: " + this.getName() + "\n" + "Built in: " + this.getDate() + ", Rate: " + this.getRate();
+        return "Name: " + this.getName() + "\n" + "Built in: " + this.getDate() + ", Description: " + this.getDescription();
     }
 }
 
