@@ -99,7 +99,7 @@ public class LoginActivity extends Activity {
                 Looper looper = null;
                 //Context context = getCont Context;
 
-                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                             ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{
@@ -111,7 +111,7 @@ public class LoginActivity extends Activity {
                     } else {
                         mLocationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
                     }
-                //}
+                }
 
                 mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
 
