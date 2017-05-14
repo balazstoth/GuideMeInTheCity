@@ -171,7 +171,18 @@ public class PortraitFragment_add extends Fragment implements LocationListener {
             }
         }
 
-        mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
+        if(mLocationManager.isProviderEnabled("gps")){
+            mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
+        }
+        else{
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.INTERNET
+            }, 10);
+        }
+
+
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)

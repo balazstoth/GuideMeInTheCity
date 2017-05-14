@@ -106,7 +106,17 @@ public class LandscapeFragment_main extends Fragment
             }
         }
 
-        mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
+
+        if(mLocationManager.isProviderEnabled("gps")){
+            mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
+        }
+        else{
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.INTERNET
+            }, 10);
+        }
 
         View v = inflater.inflate(R.layout.main_landscape, container, false);
         textView_selectedCategory = (TextView) v.findViewById(R.id.textView_selectedCategory2_l);

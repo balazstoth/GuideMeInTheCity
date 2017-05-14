@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -48,12 +49,16 @@ public class LoginActivity extends Activity {
 
         @Override
         public void onProviderEnabled(String provider) {
+
             Log.d("Provider Enabled", provider);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
+
             Log.d("Provider Disabled", provider);
+            Intent inten = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(inten);
         }
     };
 
@@ -101,21 +106,29 @@ public class LoginActivity extends Activity {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                            ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{
                                 Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.ACCESS_COARSE_LOCATION,
                                 Manifest.permission.INTERNET
                         }, 10);
-                        return;
+                        //return;
                     } else {
-                        mLocationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+                        mLocationManager.requestLocationUpdates("gps", 0, 0, locationListener);
+
                     }
                 }
-
-                mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
-
-                startActivity(touristActivity);
+                if(mLocationManager.isProviderEnabled("gps")){
+                    mLocationManager.requestSingleUpdate(criteria, locationListener, looper);
+                    startActivity(touristActivity);
+                }
+                else{
+                    requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.INTERNET
+                    }, 10);
+                }
             }
         });
 
